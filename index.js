@@ -15,16 +15,16 @@ client.on("ready", ()=>{
 
 client.on('message', async message =>{
 
-    if(message.author.bot)
+    if(message.author.bot)//if bot sends message
     {
         return;
     }
-    if(!message.content.toLowerCase().startsWith(prefix))
+    if(!message.content.toLowerCase().startsWith(prefix))//if it does not start with prefix
     {
         return;
     }
 
-    let args = message.content.slice(prefix.length).trim().split(/ +/g);
+    let args = message.content.slice(prefix.length).trim().split(/ +/g);//deal with spaces
 
     let cmd=args.shift().toLowerCase();
 
@@ -32,18 +32,18 @@ client.on('message', async message =>{
     {
         let query = args.join(" ");
 
-        if(!query)
+        if(!query)// if no query
         {
             return message.reply("Missing query");
         }
 
         let result = await superagent.get("https://customsearch.googleapis.com/customsearch/v1").query({q: query, cx: "d85b453a6dda3f5a1", key: "AIzaSyB4A7sCLtLdo5yxCRum1HDMbH7KNt5GqSo"});
 
-        if(!result.body.items)
+        if(!result.body.items)// if no search data found
         {
             return message.reply("I could not find anything!");
         }
-        if(result.status >=500)
+        if(result.status >=500)//delay
         {
             return message.reply("Error!");
         }
