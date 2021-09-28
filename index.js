@@ -10,7 +10,21 @@ const superagent=require('superagent');
 const prefix = '-';
 
 client.on("ready", ()=>{
-  console.log('Logged in as ${client.user.tag}!');
+  console.log(`Logged in as ${client.user.tag}!`);
+});
+
+client.on('guildCreate', guild => {
+
+  let channelEmbed = new Discord.MessageEmbed()
+  .setColor('RANDOM')
+  .setAuthor("WebSearch by sketch#2407")
+  .setTitle('Thank you for inviting me!')
+  .setDescription('Use -search followed by a query to see what i can do! \n Do -ping to see how quick I respond! \n My GitHub: https://github.com/ikeshav42')
+  .setTimestamp()
+  .setFooter("Have a good day!");
+
+  
+  guild.systemChannel.send(channelEmbed)
 });
 
 client.on('message', async message =>{
@@ -27,6 +41,12 @@ client.on('message', async message =>{
     let args = message.content.slice(prefix.length).trim().split(/ +/g);//deal with spaces
 
     let cmd=args.shift().toLowerCase();
+
+    if (cmd === 'ping') 
+    {
+    message.channel.send (`pong!`) 
+    message.channel.send (`${client.ws.ping} ms`)
+    }
 
     if(cmd==="search")
     {
@@ -60,6 +80,12 @@ client.on('message', async message =>{
         return message.reply(embed);
     }
 })
+
+
+
+
+
+
 
 alive()
 const mySecret = process.env['TKN']
