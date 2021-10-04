@@ -10,6 +10,7 @@ const superagent=require('superagent');
 const prefix = '-';
 
 client.on("ready", ()=>{
+  client.user.setActivity("with the world wide web")
   console.log(`Logged in as ${client.user.tag}!`);
 });
 
